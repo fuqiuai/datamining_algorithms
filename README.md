@@ -10,10 +10,10 @@
 ### 基本思想  
 在k-means算法中，用质心来表示cluster；且容易证明k-means算法收敛等同于所有质心不再发生变化。基本的k-means算法流程如下：
 选取k个初始质心（作为初始cluster）；  
-	<pre><code><font color="blue">repeat</font>：
+	'''<font color="blue">repeat</font>：
 		对每个样本点，计算得到距其最近的质心，将其类别标为该质心所对应的cluster；
 		重新计算k个cluser对应的质心；
-	<font color="blue">until</font> 质心不再发生变化</pre></code>
+	<font color="blue">until</font> 质心不再发生变化'''
 ### 算法复杂度  
 ### 缺点
 
