@@ -1,52 +1,51 @@
-from numpy import *
-import matplotlib.pyplot as plt
+# coding:utf-8
 
+import numpy as np
+import matplotlib.pyplot as plt
+    
+    
 def loadDataSet(fileName):
     '''
     加载测试数据集，返回一个列表，列表的元素是一个坐标
     '''
     dataList = []
-    fr = open(fileName)
-    for line in fr.readlines():
-        curLine = line.strip().split('\t')
-        fltLine = list(map(float,curLine))
-        dataList.append(fltLine)
+    with open(fileName) as fr:
+        for line in fr.readlines():
+            curLine = line.strip().split('\t')
+            fltLine = list(map(float,curLine))
+            dataList.append(fltLine)
     return dataList
 
-def distEclud(vecA, vecB):
-    '''
-    计算两个点的距离
-    '''
-    return sqrt(sum(power(vecA - vecB, 2)))
 
 def randCent(dataSet, k):
     '''
     随机生成k个初始的质心
     '''
-    n = shape(dataSet)[1] # n表示数据集的维度
-    centroids = mat(zeros((k,n)))
+    n = np.shape(dataSet)[1] # n表示数据集的维度
+    centroids = np.mat(np.zeros((k,n)))
     for j in range(n):
         minJ = min(dataSet[:,j])
         rangeJ = float(max(dataSet[:,j]) - minJ)
-        centroids[:,j] = mat(minJ + rangeJ * random.rand(k,1))
+        centroids[:,j] = np.mat(minJ + rangeJ * np.random.rand(k,1))
     return centroids
 
-def kMeans(dataSet, k, distMeas=distEclud, createCent=randCent):
+
+def kMeans(dataSet, k):
     '''
     KMeans算法，返回最终的质心坐标和每个点所在的簇
     '''
-    m = shape(dataSet)[0] # m表示数据集的长度（个数）
-    clusterAssment = mat(zeros((m,2)))
+    m = np.shape(dataSet)[0] # m表示数据集的长度（个数）
+    clusterAssment = np.mat(np.zeros((m,2)))
 
-    centroids = createCent(dataSet, k) # 保存k个初始质心的坐标
+    centroids = randCent(dataSet, k) # 保存k个初始质心的坐标
     clusterChanged = True
     iterIndex=1 # 迭代次数
     while clusterChanged:
         clusterChanged = False
         for i in range(m):
-            minDist = inf; minIndex = -1
+            minDist = np.inf; minIndex = -1
             for j in range(k):
-                distJI = distMeas(centroids[j,:],dataSet[i,:])
+                distJI = np.linalg.norm(np.array(centroids[j,:])-np.array(dataSet[i,:]))
                 if distJI < minDist:
                     minDist = distJI; minIndex = j
             if clusterAssment[i,0] != minIndex: clusterChanged = True
@@ -54,9 +53,10 @@ def kMeans(dataSet, k, distMeas=distEclud, createCent=randCent):
             print("第%d次迭代后%d个质心的坐标:\n%s"%(iterIndex,k,centroids)) # 第一次迭代的质心坐标就是初始的质心坐标
             iterIndex+=1
         for cent in range(k):
-            ptsInClust = dataSet[nonzero(clusterAssment[:,0].A==cent)[0]]#get all the point in this cluster
-            centroids[cent,:] = mean(ptsInClust, axis=0)
+            ptsInClust = dataSet[np.nonzero(clusterAssment[:,0].A==cent)[0]]#get all the point in this cluster
+            centroids[cent,:] = np.mean(ptsInClust, axis=0)
     return centroids, clusterAssment
+
 
 def showCluster(dataSet, k, centroids, clusterAssment):
     '''
@@ -81,9 +81,10 @@ def showCluster(dataSet, k, centroids, clusterAssment):
     plt.show()
 
 
+
 if __name__ == '__main__':
 
-    dataMat = mat(loadDataSet('./testSet')) #mat是numpy中的函数，将列表转化成矩阵
+    dataMat = np.mat(loadDataSet('./testSet')) #mat是numpy中的函数，将列表转化成矩阵
 
     k = 4 # 选定k值，也就是簇的个数（可以指定为其他数）
     cent, clust = kMeans(dataMat, k)
