@@ -4,19 +4,22 @@
   ![image](http://s16.sinaimg.cn/middle/551d7bffg80cbb284ca7f&690)
            
 >### <a href="#c4.5">1. C4.5</a>
->### <a href="#kmeans">2. K-Means</a>
+>### <a href="#kmeans">2. K-Means/K-均值算法</a>
 >### <a href="#svm">3. SVM</a>
 >### <a href="#apriori">4. Apriori</a>
 >### <a href="#em">5. EM</a>
 >### <a href="#pagerank">6. PageRank</a>
 >### <a href="#adaboost">7. AdaBoost</a>
->### <a href="#knn">8. kNN</a>
->### <a href="#naïve bayes">9. Naïve Bayes</a>
+>### <a href="#knn">8. kNN/K-邻近算法</a>
+>### <a href="#naïve bayes">9. Naïve Bayes/朴素贝叶斯算法</a>
 >### <a href="#cart">10. CART</a>
 >## <a href="#relation">相关术语</a>             
          
 
 ## <a name="kmeans">2. K-Means</a>
+
+代码：[K-means/Kmeans.py](https://github.com/fuqiuai/datamining_algorithms/blob/master/K-means/Kmeans.py)
+
 ### 简介
 又叫**K-均值算法**，是非监督学习中的聚类算法。  
 
@@ -48,6 +51,7 @@ N是元素个数，x表示元素，c(j)表示第j簇的质心
 2. 选择能达到目标函数最优的k值是非常困难的。
 
 ## <a name="knn">8. kNN</a>
+代码：[kNN/kNN.py](https://github.com/fuqiuai/datamining_algorithms/blob/master/kNN/kNN.py)
 ### 简介  
 又叫**K-邻近算法**，是监督学习中的一种分类算法。目的是根据已知类别的样本点集求出待分类的数据点类别。
 
@@ -74,7 +78,10 @@ kNN是一种lazy-learning算法，分类器不需要使用训练集进行训练�
 ### 简介  
 又叫**朴素贝叶斯算法，朴素：特征条件独立；贝叶斯：基于贝叶斯定理**。属于监督学习的生成模型，实现简单，没有迭代，并有坚实的数学理论（即贝叶斯定理）作为支撑。在大量样本下会有较好的表现，不适用于输入向量的特征条件有关联的场景。
 
-### 基本思想 
+### 基本思想  
+
+参见[朴素贝叶斯分类器-阮一峰的网络日志](http://www.ruanyifeng.com/blog/2013/12/naive_bayes_classifier.html)
+
 ### (1)病人分类的例子
 某个医院早上收了六个门诊病人，如下表：
 > 症状　　职业　　　疾病  
@@ -126,10 +133,9 @@ P(F1F2...Fn|C)P(C) = P(F1|C)P(F2|C) ... P(Fn|C)P(C)
 上式等号右边的每一项，都可以从统计资料中得到，**由此就可以计算出每个类别对应的概率，从而找出最大概率的那个类**。  
 虽然”所有特征彼此独立"这个假设，在现实中不太可能成立，但是它可以大大简化计算，而且有研究表明对分类结果的准确性影响不大。
 
-参见[朴素贝叶斯分类器-阮一峰的网络日志](http://www.ruanyifeng.com/blog/2013/12/naive_bayes_classifier.html)
-
 ### 实际应用场景  
 - 文本分类
+- 垃圾邮件过滤
 - 病人分类
 - 拼写检查
 
