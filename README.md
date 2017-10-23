@@ -3,7 +3,7 @@
   
   ![image](http://s16.sinaimg.cn/middle/551d7bffg80cbb284ca7f&690)
            
->### <a href="#c4.5">1. C4.5</a>
+>### <a href="#c4.5">1. C4.5 / 决策树算法的一种</a>
 >### <a href="#kmeans">2. K-Means / K-均值算法</a>
 >### <a href="#svm">3. SVM</a>
 >### <a href="#apriori">4. Apriori</a>
@@ -12,9 +12,35 @@
 >### <a href="#adaboost">7. AdaBoost</a>
 >### <a href="#knn">8. kNN / K-邻近算法</a>
 >### <a href="#naïve bayes">9. Naïve Bayes / 朴素贝叶斯算法</a>
->### <a href="#cart">10. CART</a>
+>### <a href="#cart">10. CART / 决策树算法的一种</a>
 >## <a href="#relation">相关术语</a>             
          
+
+## <a name="c4.5">1. C4.5</a>
+
+### 简介
+C4.5是决策树算法的一种。决策树算法作为一种分类算法，目标就是将具有p维特征的n个样本分到c个类别中去。常见的决策树算法有ID3,C4.5,CART。
+
+### 基本思想
+参见[C4.5算法详解-CSDN](http://blog.csdn.net/zjsghww/article/details/51638126)  
+（链接中错误：“以天气=“雨”的子结点为例: 2. 计算每个属性的信息熵”中Info(风速)应为0, "3. 计算信息增益"Gain(风速)应为0.970）  
+                      
+算法流程为：
+```
+while (当前节点”不纯“)  
+	(1)计算当前节点的**类别信息熵Info(D)** （以类别取值计算）  
+	(2)计算当前节点**各个属性的信息熵Info(Ai)** （以属性取值下的类别取值计算）  
+	(3)计算各个属性的**信息增益Gain(Ai)=Info(D)-Info(Ai)**  
+	(4)计算各个属性的**分类信息度量H(Ai)** （以属性取值计算）  
+	(5)计算各个属性的**信息增益率IGR(Ai)=Gain(Ai)/H(Ai)**  
+end while  
+当前节点设置为叶子节点  
+```
+### 优缺点
+#### 优点
+产生的分类规则易于理解，准确率较高。
+#### 缺点
+在构造树的过程中，需要对数据集进行多次的顺序扫描和排序，因而导致算法的低效。
 
 ## <a name="kmeans">2. K-Means</a>
 
