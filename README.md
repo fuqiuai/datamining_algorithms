@@ -22,7 +22,7 @@
 C4.5是决策树算法的一种。决策树算法作为一种分类算法，目标就是将具有p维特征的n个样本分到c个类别中去。常见的决策树算法有ID3,C4.5,CART。
 
 ### 基本思想
-参见[C4.5算法详解-CSDN](http://blog.csdn.net/zjsghww/article/details/51638126)  
+参见[C4.5算法详解-CSDN](http://blog.csdn.net/fuqiuai/article/details/79456971)  
 （链接中错误：“以天气=“雨”的子结点为例: 2. 计算每个属性的信息熵”中Info(风速)应为0, "3. 计算信息增益"Gain(风速)应为0.970）  
                       
 算法流程为：
